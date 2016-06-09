@@ -7,28 +7,115 @@
 #+LATEX_HEADER: \input{/home/stephan/H/Styles/style_presentation.tex}
 
 * What is Exacloud? And why is it on a Linux server?
+  #+BEGIN_SRC latex
+    \begin{frame}[c]{}
+      \begin{itemize}
+        \item[\bf\thesection.] \bf\insertsection
+      \end{itemize}          
+    \end{frame}
+  #+END_SRC
+** What is Exacloud?
+
+   - Exacloud a server run by OHSU to support large-scale, computational and data intense workflows.
+
+   - Currently more than 35 Terabytes of memory and more than 750 Terabytes of usable storage.
+
+   - Housed at the Data Center at OHSU's West Campus.
+     
    #+BEGIN_SRC latex
-     \begin{frame}[c]{}
-       \begin{itemize}
-         \item[\bf\thesection.] \bf\insertsection
-       \end{itemize}          
-     \end{frame}
+     \vspace{1em}
+     \begin{center}
+       \includegraphics[width=.8\textwidth]{Figures/ohsu-datacenter.png}
+     \end{center}
    #+END_SRC
+   
+
+** Exacloud and Linux
+   
+   - Exacloud uses Linux as operating system. 
+
+   - By contrast, the CHSE server (and our computers) use Windows as operating systems. 
+
+   - An operating systems is the "habitat of your programs" --- the software that manages a computer's basic functioning.
+
+   - Linux and Windows get along OK, but they do not particularly like each other.
+
+   - Most programs (such as R, stata) are developed for both OS (and Mac's OS). 
+
+** Why does Exacloud uses Linux? 
+
+   Linux is ...
+
+   - Very stable.
+
+   - Slim and scalable and therefore has less hardware requirements.
+
+   - Designed as a multi-user system. 
+
+   - More secure than Windows.
+
+   - FOSS (Free and Open Source Software).
+
+** What does this mean for us:      
+
+   - Most programs we use for our analysis are open-source and are developed on Linux: R, git, markdown.
+
+   - Stata is more geared toward Windows but has some Linux support.
+
+   - Interaction between local Windows machines and a Linux server are not perfect but fine. 
 
 * Accessing and navigating Exacloud
-   #+BEGIN_SRC latex
-     \begin{frame}[c]{}
-       \begin{itemize}
-         \item[\bf\thesection.] \bf\insertsection
-       \end{itemize}          
-     \end{frame}
-   #+END_SRC
+  #+BEGIN_SRC latex
+    \begin{frame}[c]{}
+      \begin{itemize}
+        \item[\bf\thesection.] \bf\insertsection
+      \end{itemize}          
+    \end{frame}
+  #+END_SRC
 
+** Accessing Exacloud via ssh
+   
+   - Remote access of CHSE server: through Windows desktop.
+
+   - Remote access of Exacloud: through ssh (secure shell).
+
+   - Shell is a command prompt that you can use to interact with the computer (e.g., run programs).
+
+   - Bare-bone, 1970 technology that requires very little memory.
+
+** MobaXterm: ssh for Windows
+   
+   - Install MobaXterm on desktop.
+
+   - Initiate ssh session with 
+     - Remote host: =exacloud.ohsu.edu=
+     - User name: your OHSU user name.
+
+   - Prompts for password and then connects to server.
+
+
+   /Switch to MobaXterm/
+
+** Navigating Exacloud
+
+   A couple of useful commands:
+
+   - Printing the working directory: =pwd=
+
+   - Listing files in current directory: =ls (-lh / -a)=
+
+   - Start R: =R=
+
+   - Start stata: =stata=
+
+   - Check git status: =git status=
+
+   - Work with hcondor (?): =condor_submit=, =condor_q=
 * Using hcondor on Exacloud
-   #+BEGIN_SRC latex
-     \begin{frame}[c]{}
-       \begin{itemize}
-         \item[\bf\thesection.] \bf\insertsection
-       \end{itemize}          
-     \end{frame}
-   #+END_SRC
+  #+BEGIN_SRC latex
+    \begin{frame}[c]{}
+      \begin{itemize}
+        \item[\bf\thesection.] \bf\insertsection
+      \end{itemize}          
+    \end{frame}
+  #+END_SRC
