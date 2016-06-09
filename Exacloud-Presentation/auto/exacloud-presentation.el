@@ -18,5 +18,8 @@
     "beamer"
     "beamer12")
    (LaTeX-add-labels
-    "sec:orgheadline1")))
+
+    "sec:orgheadline5"
+    "sec:orgheadline9"
+    "sec:orgheadline10")))
 
