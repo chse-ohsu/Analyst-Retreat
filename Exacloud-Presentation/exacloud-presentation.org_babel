@@ -1,0 +1,34 @@
+#+TITLE:  Exacloud: An Overview
+#+AUTHOR: Stephan Lindner
+#+DATE:   6/7/2016
+#+OPTIONS: H:2 num:t date:t aut:nil toc:nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [12pt,t,xcolor=table]
+#+LATEX_HEADER: \input{/home/stephan/H/Styles/style_presentation.tex}
+
+* What is Exacloud? And why is it on a Linux server?
+   #+BEGIN_SRC latex
+     \begin{frame}[c]{}
+       \begin{itemize}
+         \item[\bf\thesection.] \bf\insertsection
+       \end{itemize}          
+     \end{frame}
+   #+END_SRC
+
+* Accessing and navigating Exacloud
+   #+BEGIN_SRC latex
+     \begin{frame}[c]{}
+       \begin{itemize}
+         \item[\bf\thesection.] \bf\insertsection
+       \end{itemize}          
+     \end{frame}
+   #+END_SRC
+
+* Using hcondor on Exacloud
+   #+BEGIN_SRC latex
+     \begin{frame}[c]{}
+       \begin{itemize}
+         \item[\bf\thesection.] \bf\insertsection
+       \end{itemize}          
+     \end{frame}
+   #+END_SRC
