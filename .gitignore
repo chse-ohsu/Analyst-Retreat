@@ -1,0 +1,8 @@
+*.bbl
+*.blg
+*.aux
+*.aux
+*.log
+*.out
+*.pyg
+.Rhistory
