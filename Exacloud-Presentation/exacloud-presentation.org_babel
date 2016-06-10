@@ -29,7 +29,6 @@
      \end{center}
    #+END_SRC
    
-
 ** Exacloud and Linux
    
    - Exacloud uses Linux as operating system. 
@@ -72,7 +71,6 @@
       \end{itemize}          
     \end{frame}
   #+END_SRC
-
 ** Accessing Exacloud via ssh
    
    - Remote access of CHSE server: through Windows desktop.
@@ -111,7 +109,7 @@
    - Check git status: =git status=
 
    - Work with hcondor (?): =condor_submit=, =condor_q=
-* Using hcondor on Exacloud
+* Interactive and non-interactive use of Exacloud
   #+BEGIN_SRC latex
     \begin{frame}[c]{}
       \begin{itemize}
@@ -119,3 +117,132 @@
       \end{itemize}          
     \end{frame}
   #+END_SRC
+** Interactive versus non-interactive R / Stata session:
+
+   1. Interactive: 
+
+      - Workflow: Work on code in script file --> Evaluate code in R / Stata --> Revise / Debug code --> ...
+
+      - Setup: Umbrella program that integrates editor with statistical program: RStudio, standard Stata GUI, etc.
+
+      - Requirement: Umbrella program needs to be able to transfer code chunks to Stata / R and display results. 
+
+   2. Non-interactive mode:
+
+      - Workflow: Write full script file --> run full script in R / Stata --> Revise / Debug --> ...
+
+      - Setup: Call script file through umbrella program / shell. 
+
+      - Requirements: some way to call R / Stata. 
+
+** Interactive mode on servers:
+
+   Two different options:
+
+   1. Run umbrella program and R / Stata on server:
+
+      - Requires a lot of data traffic between remote server and local computer.
+
+      - This is how we use CHSE server.
+
+      - Not possible for Exacloud server because it does not have a desktop environment.
+
+** Interactive mode on servers:
+
+   Two different options:
+
+   2. Run umbrella program locally, R / Stata on server:
+
+      - Requires little data traffic between remote server and local computer.
+
+      - Umbrella program needs to be able to transfer code / results back and forth between local computer and server.
+
+      - Possible for Exacloud depending on umbrella program:
+
+	+ Rstudio: No
+
+	+ Stata: ?
+
+	+ Emacs: Yes
+
+** Non-interactive mode: a simple example
+
+   1. Script in R =example1.R=
+
+      #+BEGIN_SRC R 
+        x <- 1:1000
+        summary(x)
+      #+END_SRC
+
+   2. Run script using =Rscript=: 
+
+      #+BEGIN_SRC shell
+        Rscript example1.R
+      #+END_SRC
+
+** Non-interactive mode: a slightly more complicated example
+
+   1. R markdown script in R: =example1.Rmd=
+
+      #+BEGIN_SRC rd
+        Example markdown file
+
+        ```{r}
+         x <- 1:1000
+         summary(x)
+        ```
+      #+END_SRC
+
+   2. Master script to knit R markdown script in R: =master-knitr.R=
+
+      #+BEGIN_SRC R
+        library(knitr)
+        library(rmarkdown)
+
+        knit(commandArgs(TRUE)[1])
+      #+END_SRC
+
+      - Supply R markdown file as argument for =Rscript=. 
+
+      - Function =knit= then knits that R markdown file and outputs =.md= file.
+
+   3. Run script using =Rscript=:
+
+      #+BEGIN_SRC shell
+        Rscript master-knitr.R example1.Rmd
+      #+END_SRC
+      
+** Non-interactive mode using HTCondor
+   
+   - Purpose: Efficiently allocate resources to processes that run on decentralized computing system such as Exacloud.
+
+   - Basic usage is pretty simple: 
+
+     1. Write a submit file that tells HTCondor which program to run.
+
+     2. Submit the request to HTCondor.
+
+   - There is *a lot* we can do with HTCondor:
+
+     - Request memory for job.
+
+     - Run script files in different directories.
+
+     - Use macros, conditionals, ...
+
+** Non-interactive mode using HTCondor
+   
+   1. HTCondor submit file: =examples.htc=
+      
+      #+BEGIN_SRC text
+        Executable        = /usr/bin/Rscript
+        Arguments         = "master-knitr.R example1.Rmd"
+      #+END_SRC
+
+   2. Submit request:
+
+      #+BEGIN_SRC shell
+        condor_submit examples.htc
+      #+END_SRC
+
+   

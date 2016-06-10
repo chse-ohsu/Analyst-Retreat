@@ -1,4 +1,4 @@
-% Created 2016-06-09 Thu 15:49
+% Created 2016-06-10 Fri 13:39
 \documentclass[12pt,t,xcolor=table]{beamer}
 
 \input{/home/stephan/H/Styles/style_presentation.tex}
@@ -32,7 +32,6 @@
   \includegraphics[width=.8\textwidth]{Figures/ohsu-datacenter.png}
 \end{center}
 \end{frame}
-
 
 
 \begin{frame}[label={sec:orgheadline2}]{Exacloud and Linux}
@@ -129,11 +128,169 @@ Linux is \ldots{}
 \item Work with hcondor (?): \texttt{condor\_submit}, \texttt{condor\_q}
 \end{itemize}
 \end{frame}
-\section{Using hcondor on Exacloud}
-\label{sec:orgheadline10}
+\section{Interactive and non-interactive use of Exacloud}
+\label{sec:orgheadline17}
 \begin{frame}[c]{}
   \begin{itemize}
     \item[\bf\thesection.] \bf\insertsection
   \end{itemize}          
+\end{frame}
+
+\begin{frame}[label={sec:orgheadline10}]{Interactive versus non-interactive R / Stata session:}
+\begin{enumerate}
+\item Interactive: 
+
+\begin{itemize}
+\item Workflow: Work on code in script file --> Evaluate code in R / Stata --> Revise / Debug code --> \ldots{}
+
+\item Setup: Umbrella program that integrates editor with statistical program: RStudio, standard Stata GUI, etc.
+
+\item Requirement: Umbrella program needs to be able to transfer code chunks to Stata / R and display results.
+\end{itemize}
+
+\item Non-interactive mode:
+
+\begin{itemize}
+\item Workflow: Write full script file --> run full script in R / Stata --> Revise / Debug --> \ldots{}
+
+\item Setup: Call script file through umbrella program / shell.
+
+\item Requirements: some way to call R / Stata.
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[label={sec:orgheadline11}]{Interactive mode on servers:}
+Two different options:
+
+\begin{enumerate}
+\item Run umbrella program and R / Stata on server:
+
+\begin{itemize}
+\item Requires a lot of data traffic between remote server and local computer.
+
+\item This is how we use CHSE server.
+
+\item Not possible for Exacloud server because it does not have a desktop environment.
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[label={sec:orgheadline12}]{Interactive mode on servers:}
+Two different options:
+
+\begin{enumerate}
+\item Run umbrella program locally, R / Stata on server:
+
+\begin{itemize}
+\item Requires little data traffic between remote server and local computer.
+
+\item Umbrella program needs to be able to transfer code / results back and forth between local computer and server.
+
+\item Possible for Exacloud depending on umbrella program:
+
+\begin{itemize}
+\item Rstudio: No
+
+\item Stata: ?
+
+\item Emacs: Yes
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:orgheadline13}]{Non-interactive mode: a simple example}
+ \begin{enumerate}
+\item Script in R \texttt{example1.R}
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{r}
+x <- 1:1000
+summary(x)
+\end{minted}
+
+\item Run script using \texttt{Rscript}: 
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{shell}
+Rscript example1.R
+\end{minted}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:orgheadline14}]{Non-interactive mode: a slightly more complicated example}
+ \begin{enumerate}
+\item R markdown script in R: \texttt{example1.Rmd}
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{rd}
+Example markdown file
+
+```{r}
+ x <- 1:1000
+ summary(x)
+```
+\end{minted}
+
+\item Master script to knit R markdown script in R: \texttt{master-knitr.R}
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{r}
+library(knitr)
+library(rmarkdown)
+
+knit(commandArgs(TRUE)[1])
+\end{minted}
+
+\begin{itemize}
+\item Supply R markdown file as argument for \texttt{Rscript}.
+
+\item Function \texttt{knit} then knits that R markdown file and outputs \texttt{.md} file.
+\end{itemize}
+
+\item Run script using \texttt{Rscript}:
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{shell}
+Rscript master-knitr.R example1.Rmd
+\end{minted}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[label={sec:orgheadline15}]{Non-interactive mode using HTCondor}
+\begin{itemize}
+\item Purpose: Efficiently allocate resources to processes that run on decentralized computing system such as Exacloud.
+
+\item Basic usage is pretty simple: 
+
+\begin{enumerate}
+\item Write a submit file that tells HTCondor which program to run.
+
+\item Submit the request to HTCondor.
+\end{enumerate}
+
+\item There is \alert{a lot} we can do with HTCondor:
+
+\begin{itemize}
+\item Request memory for job.
+
+\item Run script files in different directories.
+
+\item Use macros, conditionals, \ldots{}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:orgheadline16}]{Non-interactive mode using HTCondor}
+ \begin{enumerate}
+\item HTCondor submit file: \texttt{examples.htc}
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{text}
+Executable        = /usr/bin/Rscript
+Arguments         = "master-knitr.R example1.Rmd"
+\end{minted}
+
+\item Submit request:
+
+\begin{minted}[fontsize=\footnotesize,baselinestretch=1,bgcolor=mintedbg]{shell}
+condor_submit examples.htc
+\end{minted}
+\end{enumerate}
 \end{frame}
 \end{document}
