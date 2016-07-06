@@ -47,6 +47,7 @@ See [How to undo (almost) anything with Git](https://github.com/blog/2019-how-to
 1. Edit [`TheMerryAdventuresOfRobinHood.txt`](TheMerryAdventuresOfRobinHood.txt)
     1. Change the title
     1. Globally replace `Sheriff of Nottingham` to `Sheriff of Hazzard County`
+        1. Do some "code review"
     1. Globally replace `Maid Marian` to `Xena, Princess Warrior`
 1. `revert` a pushed change
 1. `amend` a commit message
