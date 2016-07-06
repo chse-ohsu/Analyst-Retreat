@@ -73,8 +73,17 @@ It's a natural way to explore.
 
 # Searching commits
 
+* Search commit messages
+* Search file changes
+* Search authors
+
 
 # Working in a team
+
+![Centralized version control](https://homes.cs.washington.edu/~mernst/advice/version-control-fig2.png)
+![Distributed version control](https://homes.cs.washington.edu/~mernst/advice/version-control-fig3.png)
+
+[Source](https://homes.cs.washington.edu/~mernst/advice/version-control.html)
 
 
 # Archive a project
