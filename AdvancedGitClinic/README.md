@@ -91,3 +91,7 @@ It's a natural way to explore.
 
 Why archive?
 To bundle all project code, notes, tables, figures, etc., for a deliverable (e.g., paper submission).
+
+* Tagging
+* Archiving
+* [Making it citable](https://guides.github.com/activities/citable-code/) with a DOI
