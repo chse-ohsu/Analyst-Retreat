@@ -6,8 +6,29 @@
 #+LaTeX_CLASS_OPTIONS: [12pt,t,xcolor=table]
 #+LATEX_HEADER: \input{/home/stephan/H/Styles/style_presentation.tex}
 
+* Introduction / Overview
+
+** Goals of this presentation
+   #+latex:\vspace{1em}
+
+   - Give an overview of Exacloud and how we can use it.\setlength\itemsep{0.5em}
+
+   - Provide a foundation for discussion regarding how to move forward with Exacloud server.
+
+   - Stay away from more complicated, technical aspects. 
+
+** Outline 
+   #+latex:\vspace{1em}
+
+   1. What is Exacloud?\setlength\itemsep{0.5em}
+
+   2. Accessing and navigating Exacloud.
+
+   3. Interactive and non-interactice use of Exacloud.
+
 * What is Exacloud? And why is it on a Linux server?
   #+BEGIN_SRC latex
+    \setcounter{section}{1}
     \begin{frame}[c]{}
       \begin{itemize}
         \item[\bf\thesection.] \bf\insertsection
@@ -15,12 +36,13 @@
     \end{frame}
   #+END_SRC
 ** What is Exacloud?
+   #+latex:\vspace{1em}
 
-   - Exacloud a server run by OHSU to support large-scale, computational and data intense workflows.
+   - Exacloud a server run by OHSU's Advanced Computing Center to support large-scale, computational and data intense workflows.\setlength\itemsep{0.5em}
 
    - Currently more than 35 Terabytes of memory and more than 750 Terabytes of usable storage.
 
-   - Housed at the Data Center at OHSU's West Campus.
+   - Housed at the Data Center at OHSU's West Campus.\vspace{0.5em}
      
    #+BEGIN_SRC latex
      \vspace{1em}
@@ -30,38 +52,41 @@
    #+END_SRC
    
 ** Exacloud and Linux
-   
-   - Exacloud uses Linux as operating system. 
+   #+latex: \vspace{0.5em}   
 
-   - By contrast, the CHSE server (and our computers) use Windows as operating systems. 
+   - Exacloud uses Linux as operating system.\setlength\itemsep{0.5em}
 
-   - An operating systems is the "habitat of your programs" --- the software that manages a computer's basic functioning.
+   - By contrast, the CHSE server (and our computers) use Windows as operating system.
+
+   - An operating system is the software that manages a computer's basic functioning --- the "habitat of your programs".
 
    - Linux and Windows get along OK, but they do not particularly like each other.
 
-   - Most programs (such as R, stata) are developed for both OS (and Mac's OS). 
+   - Most programs (such as R, Stata) are developed for both operating systems.
 
 ** Why does Exacloud uses Linux? 
+   #+latex:\vspace{0.5em}
 
    Linux is ...
 
-   - Very stable.
+   - Very stable.\setlength\itemsep{0.5em}
 
    - Slim and scalable and therefore has less hardware requirements.
 
-   - Designed as a multi-user system. 
+   - Designed as a multi-user system.
 
    - More secure than Windows.
 
    - FOSS (Free and Open Source Software).
 
-** What does this mean for us:      
+** What this mean for us      
+   #+latex:\vspace{1.0em}
 
-   - Most programs we use for our analysis are open-source and are developed on Linux: R, git, markdown.
+   - Many programs we use for our analysis are open-source, have been developed on Linux and work very well on Exacloud: =R=, =git=, =markdown=.\setlength\itemsep{0.5em}
 
-   - Stata is more geared toward Windows but has some Linux support.
+   - =RStudio= and =Stata= are not open-source and native to Linux. They are currently not installed on Exacloud. 
 
-   - Interaction between local Windows machines and a Linux server are not perfect but fine. 
+   - Accessing Exacloud is different from accessing the CHSE server. 
 
 * Accessing and navigating Exacloud
   #+BEGIN_SRC latex
@@ -72,43 +97,47 @@
     \end{frame}
   #+END_SRC
 ** Accessing Exacloud via ssh
-   
-   - Remote access of CHSE server: through Windows desktop.
+   #+latex:\vspace{1.0em}
+  
+   - Remote access of CHSE server: through Windows desktop.\setlength\itemsep{0.5em}
 
-   - Remote access of Exacloud: through ssh (secure shell).
+   - Remote access of Exacloud: through =ssh= (secure shell).
 
-   - Shell is a command prompt that you can use to interact with the computer (e.g., run programs).
+   - =Shell= is a command prompt to interact with the computer (e.g., start or terminate programs).
 
    - Bare-bone, 1970 technology that requires very little memory.
 
 ** MobaXterm: ssh for Windows
+   #+latex:\vspace{1.0em}
    
-   - Install MobaXterm on desktop.
+   - Install =MobaXterm= on desktop.\setlength\itemsep{0.5em}
 
    - Initiate ssh session with 
      - Remote host: =exacloud.ohsu.edu=
-     - User name: your OHSU user name.
+     - User name: =your OHSU user name=.
 
    - Prompts for password and then connects to server.
 
-
-   /Switch to MobaXterm/
-
 ** Navigating Exacloud
+   #+latex:\vspace{0.5em}
 
-   A couple of useful commands:
+   A couple of useful commands:\setlength\itemsep{0.5em}
 
    - Printing the working directory: =pwd=
 
    - Listing files in current directory: =ls (-lh / -a)=
 
-   - Start R: =R=
+   - Start =R=: =R=
 
-   - Start stata: =stata=
+   - Start =Stata=: =stata= (currently not installed). 
 
-   - Check git status: =git status=
+   - Work with =HTcondor=: =condor_submit=, =condor_q=
 
-   - Work with hcondor (?): =condor_submit=, =condor_q=
+
+   #+latex:\vspace{1em}
+
+   /Switch to MobaXterm/
+
 * Interactive and non-interactive use of Exacloud
   #+BEGIN_SRC latex
     \begin{frame}[c]{}
@@ -118,71 +147,81 @@
     \end{frame}
   #+END_SRC
 ** Interactive versus non-interactive R / Stata session:
+*** 1. Interactive: 
+    
+    - Workflow: Develop some code chunk in script file \(\rightarrow\) evaluate code in =R= / =Stata= \(\rightarrow\) revise / debug code \(\rightarrow\) ... \setlength\itemsep{0.5em}\vspace{-1.0em}
 
-   1. Interactive: 
+    - Setup: Umbrella program that integrates editor with statistical program: =RStudio=, =Stata='s GUI, etc.
 
-      - Workflow: Work on code in script file --> Evaluate code in R / Stata --> Revise / Debug code --> ...
+    - Requirement: Umbrella program needs to be able to send code chunks to =R= / =Stata= and display results. 
 
-      - Setup: Umbrella program that integrates editor with statistical program: RStudio, standard Stata GUI, etc.
+** Interactive versus non-interactive R / Stata session:
+*** 2. Non-interactive mode:
 
-      - Requirement: Umbrella program needs to be able to transfer code chunks to Stata / R and display results. 
+    - Workflow: Write full script file \(\rightarrow\) run full script in =R= / =Stata= \(\rightarrow\) revise / debug \(\rightarrow\) ... \setlength\itemsep{0.5em}
 
-   2. Non-interactive mode:
+    - Setup: Call script file through umbrella program / shell (in =R=: =Rscript=).
 
-      - Workflow: Write full script file --> run full script in R / Stata --> Revise / Debug --> ...
-
-      - Setup: Call script file through umbrella program / shell. 
-
-      - Requirements: some way to call R / Stata. 
-
-** Interactive mode on servers:
-
-   Two different options:
-
-   1. Run umbrella program and R / Stata on server:
-
-      - Requires a lot of data traffic between remote server and local computer.
-
-      - This is how we use CHSE server.
-
-      - Not possible for Exacloud server because it does not have a desktop environment.
+    - Requirements: some way to call =R= / =Stata= from command line.
 
 ** Interactive mode on servers:
+*** Option 1:
+    /Run umbrella program and R / Stata on server./
 
-   Two different options:
+    - This is how we use the CHSE server.\setlength\itemsep{0.5em}
+  
+    - Requires a lot of data traffic between remote server and local computer.
+  
+    - Not possible for Exacloud server because it does not have a desktop environment.
 
-   2. Run umbrella program locally, R / Stata on server:
+** Interactive mode on servers:
+*** Option 2:
+    /Run umbrella program locally, R / Stata on server./
 
-      - Requires little data traffic between remote server and local computer.
+      - Requires little data traffic between remote server and local computer.\setlength\itemsep{0.5em}
 
       - Umbrella program needs to be able to transfer code / results back and forth between local computer and server.
 
-      - Possible for Exacloud depending on umbrella program:
+      - Possible for Exacloud, depending on umbrella program:
 
 	+ Rstudio: No
 
 	+ Stata: ?
 
-	+ Emacs: Yes
+	+ Emacs: Yes :)
 
 ** Non-interactive mode: a simple example
+   #+latex:\vspace{1em}
 
-   1. Script in R =example1.R=
+   1. Write =.R= file (/example1.R/): \setlength\itemsep{0.5em}
 
       #+BEGIN_SRC R 
         x <- 1:1000
         summary(x)
       #+END_SRC
 
-   2. Run script using =Rscript=: 
+   2. Evaluate =.R= file using =Rscript=: 
 
       #+BEGIN_SRC shell
         Rscript example1.R
       #+END_SRC
 
-** Non-interactive mode: a slightly more complicated example
+** Non-interactive mode: processing R markdown file
+   #+latex:\vspace{0.5em}
+   
+   - An =.Rmd= file has text and source code.\setlength\itemsep{0.5em}
 
-   1. R markdown script in R: =example1.Rmd=
+   - =knitR= evaluates the =R= source blocks and creates =markdown= file.
+
+   - In interactive mode, simply call =knit(file.Rmd)= in =R=.
+
+   - Does not work in non-interactive mode because =Rscript= does not accept =.Rmd= as input file.
+
+   - Solution: write =R= script file that calls =knit= to evaluate =.Rmd= file. 
+     
+** Non-interactive mode: processing R markdown file
+
+   1. Write =.Rmd= file (/example1.Rmd/): \setlength\itemsep{0.5em}
 
       #+BEGIN_SRC rd
         Example markdown file
@@ -193,36 +232,32 @@
         ```
       #+END_SRC
 
-   2. Master script to knit R markdown script in R: =master-knitr.R=
+   2. Write =.R= file that evaluates =.Rmd= file (/master-knitr.R/):
 
       #+BEGIN_SRC R
         library(knitr)
         library(rmarkdown)
-
         knit(commandArgs(TRUE)[1])
       #+END_SRC
 
-      - Supply R markdown file as argument for =Rscript=. 
-
-      - Function =knit= then knits that R markdown file and outputs =.md= file.
-
-   3. Run script using =Rscript=:
+   3. Evaluate =.R= file using =Rscript=: 
 
       #+BEGIN_SRC shell
         Rscript master-knitr.R example1.Rmd
       #+END_SRC
       
-** Non-interactive mode using HTCondor
+** Non-interactive mode on Exacloud: HTCondor
+   #+latex:\vspace{0.5em}
    
-   - Purpose: Efficiently allocate resources to processes that run on decentralized computing system such as Exacloud.
+   - Purpose: Efficiently allocate resources to processes that run on decentralized computing system such as Exacloud.\setlength\itemsep{0.75em}
 
    - Basic usage is pretty simple: 
 
-     1. Write a submit file that tells HTCondor which program to run.
+     1. Write a submit file that tells =HTCondor= which program to run.
 
-     2. Submit the request to HTCondor.
+     2. Submit the request to =HTCondor=.
 
-   - There is *a lot* we can do with HTCondor:
+   - There is a lot we could do with =HTCondor=:
 
      - Request memory for job.
 
@@ -231,18 +266,50 @@
      - Use macros, conditionals, ...
 
 ** Non-interactive mode using HTCondor
+   #+latex:\vspace{0.5em}
    
-   1. HTCondor submit file: =examples.htc=
+   1. Write =.Rmd= file (/example1.Rmd/): \setlength\itemsep{0.3em}
+
+      #+BEGIN_SRC rd
+        Example markdown file
+
+        ```{r}
+         x <- 1:1000
+         summary(x)
+        ```
+      #+END_SRC
+
+   2. Write =.R= file to evaluate =.Rmd= file (/example1.R/): 
+
+      #+BEGIN_SRC R
+        library(knitr); library(rmarkdown)
+        knit(commandArgs(TRUE)[1])
+      #+END_SRC
+
+   3. Write =HTCondor= file to evaluate =.R= file (/examples.htc/):
       
       #+BEGIN_SRC text
         Executable        = /usr/bin/Rscript
         Arguments         = "master-knitr.R example1.Rmd"
       #+END_SRC
 
-   2. Submit request:
+   4. Run file:
 
       #+BEGIN_SRC shell
         condor_submit examples.htc
       #+END_SRC
 
-   
+** Complete sequence to evaluate .Rmd script on Exacloud: 
+   #+latex:\vspace{1.0em}
+
+   1. Submit file to =HTCondor=.\setlength\itemsep{0.5em}
+
+   2. =HTCondor= calls =Rscript=.
+
+   3. =Rscript= evaluates =master-knitr.R=.
+
+   4. =master-knitr.R= calls =knit= to evaluate =.Rmd= file. 
+
+   5. Resulting markdown file can be downloaded and exported to html / pdf.  
+
+
