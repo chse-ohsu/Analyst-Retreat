@@ -33,13 +33,14 @@
     * An analogy... GitHub.com:git :: Amazon.com:internet
 
 There's a really nice, new, cross-platform git GUI client: [GitKraken](https://www.gitkraken.com/).
-Less confusing GUI.
+Not as many features.
+But less confusing GUI.
 Might be a good alternative if [SourceTree](http://www.sourcetreeapp.com/) is overwhleming.
 
 
 # Reversing edits
 
-A.k.a. **Super Undo**
+A.k.a. **Super Undo Time Machine**
 
 See [How to undo (almost) anything with Git](https://github.com/blog/2019-how-to-undo-almost-anything-with-git).
 
