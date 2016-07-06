@@ -7,3 +7,4 @@
 *.pyg
 *.el
 .Rhistory
+exacloud-presentation.el
